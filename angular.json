@@ -117,8 +117,16 @@
               "devServerTarget": "fotosFirebase:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "fotosFirebase"
+    }
+  },
+  "defaultProject": "fotosFirebase",
+  "cli": {
+    "analytics": "f7d0a78a-6d64-42b3-9ab5-76ebb1e94461"
+  }
 }
