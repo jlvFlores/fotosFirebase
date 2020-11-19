@@ -14,6 +14,7 @@ export class NgDropFilesDirective {
   @HostListener('dragover', [`$event`])
   public onDragEnter( event: any ){
     this.mouseSobre.emit( true );
+    this._prevenirDetener( event );
   }
 
   @HostListener('dragleave', [`$event`])
@@ -21,7 +22,46 @@ export class NgDropFilesDirective {
     this.mouseSobre.emit( false );
   }
 
-  //Validaciones
+  @HostListener('drop', [`$event`])
+  public drop( event: any ){
+
+    const transferencia = this._getTransfer( event );
+
+    if ( !transferencia ) {
+      return;
+    }
+
+    this._extraerArchivos( transferencia.files );
+
+    this._prevenirDetener( event );
+    this.mouseSobre.emit( false );
+
+  }
+
+  private _getTransfer( event: any ) {
+    return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer;
+  }
+
+  private _extraerArchivos( archivosLista: FileList ) {
+    // console.log();
+    // tslint:disable-next-line: forin
+    for ( const propiedad in Object.getOwnPropertyNames( archivosLista ) ) {
+
+      const archivoTemp = archivosLista[propiedad];
+
+      if ( this._archivoPuedeSerCargado( archivoTemp )) {
+
+        const nuevoArchivo = new FileItem( archivoTemp );
+        this.archivos.push( nuevoArchivo );
+
+      }
+    }
+
+    console.log( this.archivos );
+
+  }
+
+  // Validaciones
   private _archivoPuedeSerCargado( archivo: File ): boolean {
     if ( !this._archivoFueDroppeado( archivo.name ) && this._esImagen( archivo.type )) {
       return true;
