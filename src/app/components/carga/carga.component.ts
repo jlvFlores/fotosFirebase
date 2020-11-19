@@ -12,16 +12,16 @@ export class CargaComponent implements OnInit {
   estaSobreElemento = false;
   archivos: FileItem[] = [];
 
-  constructor( public _cargaImagenes: CargaImagenesService ) { }
+  constructor( public loadImages: CargaImagenesService ) { }
 
   ngOnInit(): void {
   }
 
   cargarImagenes(): void  {
-    this._cargaImagenes.cargarImagenesFirebase(  this.archivos );
+    this.loadImages.cargarImagenesFirebase(  this.archivos );
   }
 
-  pruebaSobreElemento( event ) {
-    console.log( event );
+  limpiarArchivos(): void {
+    this.archivos = [];
   }
 }
