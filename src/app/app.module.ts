@@ -7,7 +7,7 @@ import { FotosComponent } from './components/fotos/fotos.component';
 import { CargaComponent } from './components/carga/carga.component';
 
 import { CargaImagenesService } from './services/carga-imagenes.service';
-import { firebaseConfig } from '../environments/environment';
+import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -23,7 +23,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     BrowserModule,
     AppRoutingModule,
     APP_ROUTES,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
   ],
